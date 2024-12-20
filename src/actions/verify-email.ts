@@ -1,5 +1,6 @@
 "use server"
 
+import { signIn } from "@/auth"
 import { prisma } from "@/lib/db"
 import { getVerificationTokenByToken } from "@/lib/tokens"
 import { getUserByEmail } from "@/lib/user"

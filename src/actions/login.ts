@@ -2,9 +2,9 @@
 
 import { signIn } from "@/auth";
 import { sendVerificationEmail } from "@/lib/emails";
-import { generateVerificationToken } from "@/lib/tokens";
+import { generateVerificationToken, getVerificationTokenByEmail, getVerificationTokenByToken } from "@/lib/tokens";
 import { getUserByEmail } from "@/lib/user";
-import { userLoginSchema, userLoginSchemaType } from "@/schemas/auth/user";
+import { userLoginSchema, userLoginSchemaType } from "@/schemas/index";
 import { AuthError } from "next-auth";
 
 export const login = async (values: userLoginSchemaType) => {
@@ -24,6 +24,12 @@ export const login = async (values: userLoginSchemaType) => {
     }
 
     if (!existingUser.emailVerified) {
+      // const verificationEmail = await getVerificationTokenByEmail(existingUser.email)
+      // if(!verificationEmail?.email) return { error:"Email does not exist",success:null };
+      
+      // const isVerificationEmailExpired = new Date(verificationEmail?.expires) < new Date();
+      // if(!isVerificationEmailExpired) return  { error:"Please verify your email",success:null}
+
       const verificationToken = await generateVerificationToken(
         existingUser.email
       );

@@ -14,7 +14,7 @@ export const Navbar = () => {
                    Sign In
                 </Link>
             </Button>
-            <Button>
+            <Button color="primary">
                 <Link href="/auth/signup" >
                    Get Started
                 </Link>

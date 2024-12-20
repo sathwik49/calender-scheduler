@@ -3,13 +3,13 @@ import { prisma } from "@/lib/db";
 import { sendVerificationEmail } from "@/lib/emails";
 import { generateVerificationToken, produceVerificationToken } from "@/lib/tokens";
 import { getUserByEmail } from "@/lib/user";
-import { userSignUpSchema, userSignUpSchemaType } from "@/schemas/auth/user";
+import { userSignUpSchema, userSignUpSchemaType } from "@/schemas/index";
 import bcryptjs from "bcryptjs"
 
 
 export const signUp = async (values:userSignUpSchemaType) => {
     try {
-        const { name,email,password } = values;
+        const { email,password,name } = values;
 
         const validated = userSignUpSchema.safeParse({email,password,name});
 
@@ -26,10 +26,10 @@ export const signUp = async (values:userSignUpSchemaType) => {
         const hashedPassword = await bcryptjs.hash(password,10);
 
         const user = await prisma.user.create({
-            data : {
+            data:{
                 name,
                 email,
-                password:hashedPassword
+                password:hashedPassword,
             }
         })
 

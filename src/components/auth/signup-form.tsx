@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userSignUpSchema, userSignUpSchemaType } from "@/schemas/auth/user";
+import { userSignUpSchema, userSignUpSchemaType } from "@/schemas/index";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -41,9 +41,8 @@ export const SignUpForm = () => {
       setError(res.error);
       setSuccess(res.success);
       if (!res.error) {
-        form.setValue("name", ""),
-          form.setValue("email", ""),
-          form.setValue("password", "");
+        form.setValue("name", "");
+        form.setValue("email", ""), form.setValue("password", "");
       }
       setTimeout(() => (setError(""), setSuccess("")), 4500);
     });

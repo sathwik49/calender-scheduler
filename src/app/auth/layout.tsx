@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 
-
 export const metadata:Metadata = {
   title:"Sign Up",
   description:"Cal Organizer Sign up page"
 }
-
 
 export default function AuthLayout({
   children,

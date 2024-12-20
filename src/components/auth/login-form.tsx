@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userLoginSchema, userLoginSchemaType } from "@/schemas/auth/user";
+import { userLoginSchema, userLoginSchemaType } from "@/schemas/index";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -18,7 +18,7 @@ import { useState, useTransition } from "react";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { ClipLoader } from "react-spinners";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 export const LoginForm = () => {
   const [error, setError] = useState<string | null>("");
@@ -29,7 +29,6 @@ export const LoginForm = () => {
 
   const form = useForm({
     defaultValues: {
-      name: "",
       email: "",
       password: "",
     },
@@ -45,7 +44,7 @@ export const LoginForm = () => {
       //setSuccess(res.success);
       if (!res.error) {
         form.setValue("email", ""), form.setValue("password", "");
-        router.push("/dashboard")
+        redirect("/onboarding")
       }
       setTimeout(() => (setError(""), setSuccess("")), 4500);
     });

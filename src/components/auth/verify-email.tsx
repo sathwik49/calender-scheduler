@@ -23,7 +23,7 @@ export const VerifyEmail = () => {
     const res = await verifyEmail(token);
     setError(res.error);
     if(!res.error){
-      router.push("/dashboard")
+      router.push("/auth/login")
     }
     //setSuccess(res.success);
   }, [token]);
